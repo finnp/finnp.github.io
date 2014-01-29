@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>3D-Drucker - ProSeminar Geschichte des Computers</title>
+
+		<meta name="description" content="Präsentation über 3D-Drucker für das ProSeminar Geschichte des Computers">
+		<meta name="author" content="Finn Pauls">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/simple.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>3D-Drucker</h1>
+					<h3>ProSeminar Geschichte des Computers</h3>
+					<p>
+						<small>Finn Pauls, FU Berlin, Februar 2014</small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Was ist ein 3D-Drucker?</h2>
+					<p>Maschine, die <strong>drei-dimensionale</strong> feste Objekte anhand eines <strong>digitalen Modells</strong> durch einen <strong>ebenenweisen</strong> Prozess herstellt.</p>
+				</section>
+
+				<section>
+					<h2>Verschiedene Verfahren</h2>
+					<p>
+					<ul>
+						<li>Fused Deposition Modeling ("Schmelzschichtung")</li>
+						<li>Lichtpolymerisierung
+							<ul>
+								<li>Stereolithografie</li>
+								<li>Digital Light Processing</li>
+							</ul>
+						</li>
+						<li>Selektives Laserschmelzen (Granular)</li>
+					</ul>
+					</p>
+					<small><a href="http://en.wikipedia.org/wiki/3D_printing#Additive_processes">Quelle</a></small>
+				</section>
+
+				<section>
+					<h2>Fused Deposition Modeling</h2>
+					<h3>Prinzip</h3>
+					<p>Schmelzung eines Kunststoffdrahts und anschließende Kühlung beim Auftragen der Schicht.</p>
+					<p>Wir haben einen solchen 3D-Drucker hier (Kurze Vorführung).</p>
+
+				</section>
+
+				<section>
+					<h2>Stereolithografie</h2>
+					<p>
+					<ul>
+						<li>Entwickelt 1984 von Charles W. Hull bei <i>3D Systems Inc.</i></li>
+						<li>Erstes funktionierendes 3D-Druck-Verfahren</li>
+					</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>Stereolithografie</h2>
+					<h3>Prinzip</h3>
+					<p>Punktuelle ebenenweise Verfestigung eines lichtaushärtenden flüssigen Kunststoffs mit einem Laser</p>
+					<img src="http://upload.wikimedia.org/wikipedia/commons/4/44/CAD_CAM.png" alt="Prinzip Stereolithographie" />
+					<small><a href="http://commons.wikimedia.org/wiki/File:CAD_CAM.png">Bildquelle</a></small>
+
+					<aside class="notes">
+						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+					</aside>
+				</section>
+
+				<section>
+					<h2>Stereolithografie</h2>
+					<h3>Hobbyprodukt: Formlabs Form1</h3>
+					<img src="img/formlabs.png" alt="Formlabs Screenshot">
+				</section>
+
+				<section>
+					<h2>Stereolithografie</h2>
+					<h3>Video</h3>
+					<iframe width="842" height="480"  src="http://www.youtube.com/embed/eTTmh_ZzoVg?start=15&end=24&autohide=1&controls=0&loop=1" frameborder="0" allowfullscreen></iframe>
+				</section>
+
+				<section>
+					<h2>Digital Light Processing</h2>
+					<ul>
+						<li>Ähnliches Prinzip wie Stereolithografie</li>
+						<li>Erhärtung passiert parallel durch ein Beamer-Bild</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Digital Light Processing</h2>
+					<h3>Hobbyprodukt: B9Creator</h3>
+					<img src="img/b9creator.jpg" alt="B9Creator" />
+				</section>
+
+				<section>
+					<h2>Selektives Laserschmelzen</h2>
+					<ul>
+						<li>Ähnlich wie Stereolithografie, aber Granulat wird geschmolzen und erhärtet daraufhin</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Selektives "Laser"-Schmelzen</h2>
+					<h3>Ungewöhnliches Beispiel</h3>
+					<iframe src="http://player.vimeo.com/video/25401444?title=0&amp;byline=0&amp;autoplay=0&amp;portrait=0" width="854" height="480" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+				</section>
+
+				<section>
+					<h2>Verbreitete Standards</h2>
+					<p>
+						<strong>STL-Format</strong> zur Verbreitung von <i>Druckvorlagen</i>
+					</p>
+					<p>
+						<strong>G-Code</strong> zur Steuerung des 3D-Druckers
+					</p>
+				</section>
+
+				<section>
+					<h2>STL-Format</h2>
+					<ul>
+					<li>Ursprünglich von <i>3D Systems Inc.</i> für ihre <b>ST</b>ereo<b>l</b>ithographie-Drucker entwickelt</li>
+					<li>Sprache zur Beschreibung von Oberflächen eines 3D-Objektes durch Dreiecke.</li>
+					</ul>
+					<pre><code>
+						solid name
+						    facet normal ni nj nk
+							    outer loop
+							        vertex v1x v1y v1z
+							        vertex v2x v2y v2z
+							        vertex v3x v3y v3z
+							    endloop
+						    endfacet
+						endsolid name
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>G-Code</h2>
+					<ul>
+					<li>Ursprünglich für CNC-Maschinen entwickelt</li>
+					<li>Sprache zur simplen Übermittlung von Steuerungsbefehlen</li>
+					</ul>
+					<pre><code>
+						G28 X0 Y0  ;move X/Y to min endstops
+						G28 Z0     ;move Z to min endstops
+						G1 Z15.0 F40  ;move the platform down 15mm with a speed of 40 mm/s
+						G1 F200 E3              ;extrude 3mm of feed stock
+					</code></pre>
+				</section>
+
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				slideNumber: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
