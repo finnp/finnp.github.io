@@ -7,3 +7,29 @@
 	width: 149px;
 	background-image: url(https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png);
 }
+
+.portfolio-item {
+	transition: opacity 0.5s;
+	transition: filter 0.5s;
+	-webkit-transition: opacity 0.5s;
+}
+
+.portfolio-item {
+	-webkit-filter: grayscale(100%);
+	-moz-filter: grayscale(100%);
+	filter: grayscale(100%);
+}
+
+.portfolio-item:hover, .highlight {
+	-webkit-filter: grayscale(0%);
+	-moz-filter: grayscale(0%);
+	filter: grayscale(0%);
+}
+
+.hide-away {
+	opacity: 0.4;
+}
+
+.skills > li {
+	cursor: crosshair;
+}
