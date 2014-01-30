@@ -1,9 +1,17 @@
 body {
-	border-top: 10px solid #9acd32;
+	background-color: #efefef;
 }
 
 h1 > span {
 	color: #9acd32;
+}
+
+.main {
+	background-color: white;
+	border-top: 5px solid #9acd32;
+	-webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.20)
+	-moz-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.20);
+	box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.20)
 }
 
 .fork-project {
