@@ -3,52 +3,61 @@
 		<title>finnpauls</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet" />
 		<link href="css/index.css" rel="stylesheet" />
+		<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
 	</head>
 	<body>
 		<div class="container">
 			<h1>finnpauls</h1>
 			<p class="lead">something, something, something, developer</p> 
 			<section>
-				<h2>slides</h2>
-				<a href="3dprinting-de">3D-Printing (In German)</a>
+				<h2>skills</h2>
+				<ul class="skills list-inline">
+					<li>Javascript</li>
+					<li>PHP</li>
+					<li>Node</li>
+					<li>Python</li>
+					<li>HTML</li>
+					<li>CSS</li>
+				</ul>
 			</section>
 			<section>
 				<h2>portfolio</h2>
 				<div class="row">
-					<div  class="col-md-4">
+					<div class="portfolio-item col-md-4">
 						<a href="http://www.picify.de" target="_blank">
 							<img src="img/picify-300px.jpg" alt="Piciy" class="img-thumbnail" />
 						</a>
 						<p>
-							<strong>picify</strong> frontend and backend work<br/><i>PHP, Javascript, HTML, CSS, Zend</i>
+							<strong>picify</strong> frontend and backend work<br/><i class="tags">PHP, Javascript, HTML, CSS, Zend</i>
 						</p>
 					</div>
-					<div  class="col-md-4">
+					<div  class="portfolio-item col-md-4">
 						<a href="http://piazzo.co" target="_blank">
 							<img src="img/piazzo-300px.jpg" alt="Piazzo" class="img-thumbnail" />
 						</a>
 						<p>
-							<strong>piazzo</strong> frontend and backend work<br/><i>Node, Javascript, HTML, CSS, Express, Backbone.js</i>
+							<strong>piazzo</strong> frontend and backend work<br/><i class="tags">Node, Javascript, HTML, CSS, Express, Backbone.js</i>
 						</p>
 					</div>
-					<div  class="col-md-4">
+					<div  class="portfolio-item col-md-4">
 						<a href="http://squarewheel.herokuapp.com" target="_blank">
 							<img src="img/squarewheel-300px.jpg" alt="Squarewheel" class="img-thumbnail" />
 							<a class="fork-project" href="https://github.com/finnp/squarewheel"></a>
 						</a>
 						<p>
-							<strong>squarewheel</strong> frontend and backend work<br/><i>Python, Flask, Javascript, HTML, CSS</i>
+							<strong>squarewheel</strong> frontend and backend work<br/><i class="tags">Python, Flask, Javascript, HTML, CSS</i>
 						</p>
 					</div>
 				</div>
 				<div class="row">
-					<div  class="col-md-4">
+					<div  class="portfolio-item col-md-4">
 						<a href="http://interwikidict.herokuapp.com" target="_blank">
 							<img src="img/interwikidict-300px.jpg" alt="Interwikidict" class="img-thumbnail" />
 							<a class="fork-project" href="https://github.com/finnp/interwikidict"></a>
 						</a>
 						<p>
-							<strong>interwikidict</strong> frontend and backend work<br/><i>Ruby, Sinatra, Javascript, HTML, CSS</i>
+							<strong>interwikidict</strong> frontend and backend work<br/><i class="tags">Ruby, Sinatra, Javascript, HTML, CSS</i>
 						</p>
 					</div>
 					<div  class="col-md-4">
@@ -60,6 +69,10 @@
 						</p>
 					</div>
 				</div>
+			</section>
+			<section>
+				<h2>slides</h2>
+				<a href="3dprinting-de">3D-Printing (In German)</a>
 			</section>
 		</div>
 	</body>
