@@ -2,6 +2,9 @@
 var johnson = require('polyhedra').johnson
 var THREE = require('three')
 
+var leftButton = document.querySelector('#left')
+var rightButton = document.querySelector('#right')
+
 var scene = new THREE.Scene()
 
 var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 20000)
@@ -19,19 +22,11 @@ document.body.appendChild(renderer.domElement)
 var lights = []
 lights[0] = new THREE.PointLight(0xffffff, 1, 0)
 lights[1] = new THREE.PointLight(0xffffff, 1, 0)
-// lights[2] = new THREE.PointLight(0xffffff, 1, 0)
-// lights[3] = new THREE.PointLight(0xffffff, 1, 0)
-
 lights[0].position.set(0, 200, 4000)
 lights[1].position.set(100, 200, 4000)
-// lights[2].position.set(-100, -200, -100)
-// lights[3].position.set(0, -200, -100)
-// lights[3].position.set(0, -200, 100)
 
 scene.add(lights[0])
 scene.add(lights[1])
-// scene.add(lights[2])
-// scene.add(lights[3])
 
 var skyBoxGeometry = new THREE.CubeGeometry(8000, 8000, 8000)
 var skyBoxMaterial = new THREE.MeshBasicMaterial({ color: 0xcccfff, side: THREE.BackSide })
@@ -45,25 +40,12 @@ function getMash (data) {
     return new THREE.Vector3(v[0], v[1], v[2]).multiplyScalar(100)
   })
 
-  var vertexGeometry = new THREE.SphereGeometry(6, 12, 6)
-  var vertexMaterial = new THREE.MeshLambertMaterial({ color: 0x000000 })
-  var vertexSingleMesh = new THREE.Mesh(vertexGeometry)
-
-  var vertexAmalgam = new THREE.Geometry()
-  vertex.forEach(function (v) {
-    var vMesh = vertexSingleMesh.clone()
-    vMesh.position = v
-    vMesh.updateMatrix()
-    vertexAmalgam.merge(vMesh.geometry, vMesh.matrix)
-  })
-
-  var vertexMesh = new THREE.Mesh(vertexAmalgam, vertexMaterial)
-  polyhedron.add(vertexMesh)
-
   // convert face data to a single (triangulated) geometry
   var faceMaterial = new THREE.MeshPhongMaterial({
     color: 0x156289,
     emissive: 0x072534,
+    transparent: true,
+    opacity: 0.9,
     side: THREE.DoubleSide,
     shading: THREE.FlatShading
   })
@@ -87,17 +69,18 @@ function getMash (data) {
 }
 
 var h1 = document.querySelector('h1')
-var index = 1
+var index = Number(window.location.hash.slice(1)) || 1
 var polyhedra = []
 var group = new THREE.Object3D()
 
 for (var i = 1; i <= 92 ;i += 1) {
-  polyhedra[i] = setJohnson(i)
+  polyhedra[i] = getMash(getJohnson(i))
   polyhedra[i].position.z = 0 + 3000 * Math.cos(i * 2 * Math.PI / 92)
   polyhedra[i].position.x = 0 + 3000 * Math.sin(i * 2 * Math.PI / 92)
   group.add(polyhedra[i])
 }
 scene.add(group)
+displayJohnson(index)
 
 var render = function () {
   window.requestAnimationFrame(render)
@@ -105,7 +88,7 @@ var render = function () {
     polyhedron.rotation.x += 0.005
     polyhedron.rotation.y += 0.005
   })
-  group.rotation.y += 0.001
+
   renderer.render(scene, camera)
 }
 render()
@@ -113,23 +96,34 @@ render()
 document.addEventListener('keydown', function (event) {
   var key = event.keyCode || event.which
   if (key === 39) {
-    if (index === 92) return
-    index++
+    if (index === 92) index = 1
+    else index++
   } else if (key === 37) {
-    if (index === 1) return
-    index--
+    if (index === 1) index = 92
+    else index--
   } else {
     return
   }
-  camera.lookAt(polyhedra[index].position)
+  displayJohnson(index)
 })
 
-function setJohnson (index) {
-  var solid = johnson['J' + index]
-  // var name = solid.name.replace(/\(.+\)/, '')
-  // h1.innerText = 'j' + index + ': ' + name.toLowerCase()
-  var polyhedron = getMash(solid)
-  return polyhedron
+window.addEventListener('hashchange', function () {
+  index = Number(window.location.hash.slice(1))
+  displayJohnson(index)
+})
+
+function displayJohnson () {
+  window.location.hash = index
+  var solid = getJohnson(index)
+  var name = solid.name.replace(/\(.+\)/, '')
+  leftButton.href = '#' + (index === 1 ? 92 : (index - 1))
+  rightButton.href = '#' + (index === 92 ? 1 : (index + 1))
+  h1.innerText = 'j' + index + ': ' + name.toLowerCase()
+  group.rotation.y = (92 - index) * (2 * Math.PI / 92)
+}
+
+function getJohnson (index) {
+  return johnson['J' + index]
 }
 
 },{"polyhedra":7,"three":8}],2:[function(require,module,exports){
