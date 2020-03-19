@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<title>finn pauls</title>
 	<style>
-		body {
+		article {
 			background: url('finn.jpg') no-repeat center center fixed;
 			background-size: cover;
 			font-family: 'Sen', sans-serif;
-			overflow: hidden;
+			margin: 25px;
+			min-height: 100%;
+			min-height: calc(100% - 50px);
 		}
+
+		html,
+		body {
+			overflow: hidden;
+			height: 100%;
+			margin: 0;
+		}
+
 
 		a {
 			color: black;
@@ -24,14 +35,23 @@
 			background-color: rgba(255, 255, 255, 0.7);
 			width: 350px;
 			padding: 24px 18px;
-			border-radius: 0px 15px 0px 15px;
+		}
+
+		@media (max-width: 400px) {
+			header {
+				width: 90%;
+			}
+
+			h2 {
+				font-size: 1.2em;
+			}
 		}
 	</style>
 	<link href="https://fonts.googleapis.com/css?family=Liu+Jian+Mao+Cao|Sen&display=swap" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body class="sans-serif">
+<body>
 	<article>
 		<header>
 			<h1>finn pauls</h1>
@@ -40,4 +60,5 @@
 		</header>
 	</article>
 </body>
+
 </html>
