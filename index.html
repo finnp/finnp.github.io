@@ -1,46 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>finn pauls</title>
-		<link href="css/tachyons.min.css" rel="stylesheet" />
-		<style>
-		ul {
-		  list-style-type: none;
-		  padding-left: 1em;
+<head>
+	<title>finn pauls</title>
+	<style>
+		body {
+			background: url('finn.jpg') no-repeat center center fixed;
+			background-size: cover;
+			font-family: 'Sen', sans-serif;
 		}
 
-		ul li:before {
-		  content: "–";
-		  position: absolute;
-		  margin-left: -1em;
+		a {
+			color: black;
 		}
 
-		body, a {
-			background-color: #6B2F30;
-			color: #DBDACD;
+		h1 {
+			margin-top: 0;
+			font-size: 2em;
+		}
+
+		header {
+			background-color: rgba(255, 255, 255, 0.7);
+			width: 350px;
+			padding: 24px 18px;
+			border-radius: 0px 15px 0px 15px;
 		}
 	</style>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-	</head>
-	<body  class="sans-serif">
-		<article class="cf ph3 ph5-ns pv5">
-  <header class="fn fl-ns w-50-ns pr4-ns">
-    <h1 class="f2 lh-title fw7 mt0 pt3 bt bw2">
-      finn pauls
-    </h1>
-		<img class="br-100 ba w5 h5 bw1" src="finn.jpeg" alt="Finn Pauls" />
-    <h2 class="f3">
-      freelance software engineer
-    </h2>
-		<ul>
-			<li>javascript</li>
-			<li>react</li>
-			<li>node.js</li>
-		</ul>
-		<a class="f5 link dim ba bw1 ph3 pv2 mv3 mb2 dib" href="https://github.com/finnp">github</a>
-		<a class="f5 link dim ba bw1 ph3 pv2 mv3 mb2 dib" href="https://www.linkedin.com/in/finnpauls/">linkedin</a>
-		<a class="f5 link dim ba bw1 ph3 pv2 mv3 mb2 dib" href="mailto:ich@finnpauls.de">email</a>
-  </header>
-</article>
-	</body>
+	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body class="sans-serif">
+	<article>
+		<header>
+			<h1>finn pauls</h1>
+			<h2>engineering · product · design</h2>
+			<a href="mailto:ich@finnpauls.de" target="_blank">get in touch!</a>
+		</header>
+	</article>
+</body>
 </html>
