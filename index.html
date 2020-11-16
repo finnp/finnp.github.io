@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<title>finn pauls</title>
 	<style>
 		article {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
 			background: url('finn.jpg') no-repeat center center fixed;
 			background-size: cover;
 			font-family: 'Sen', sans-serif;
@@ -30,14 +34,14 @@
 			font-family: 'Liu Jian Mao Cao', cursive;
 		}
 
-		header {
+		header, footer {
 			background-color: rgba(255, 255, 255, 0.7);
 			width: 350px;
 			padding: 24px 18px;
 		}
 
 		@media (max-width: 400px) {
-			header {
+			header, footer {
 				width: 90%;
 			}
 
@@ -57,6 +61,9 @@
 			<h2>engineering · product · design</h2>
 			<a href="mailto:ich@finnpauls.de" target="_blank">get in touch!</a>
 		</header>
+		<footer>
+			part of <a href="https://karugamo.agency/" target="_blank">karugamo</a> agency
+		</footer>
 	</article>
 </body>
 
