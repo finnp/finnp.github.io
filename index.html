@@ -5,6 +5,11 @@
 	<meta charset="UTF-8">
 	<title>finn pauls</title>
 	<style>
+		:root {
+			--glass-background: rgba(237, 237, 230, 0.26);
+			--glass-filter: blur(18px) saturate(140%);
+		}
+
 		article {
 			display: flex;
 			flex-direction: column;
@@ -63,10 +68,27 @@
 
 		.dot-grid {
 			inset: 0;
-			mix-blend-mode: difference;
 			pointer-events: none;
 			position: absolute;
 			z-index: 0;
+		}
+
+		.background-glass {
+			-webkit-backdrop-filter: var(--glass-filter);
+			-webkit-mask-image: url('foreground-mask.svg');
+			-webkit-mask-position: center;
+			-webkit-mask-repeat: no-repeat;
+			-webkit-mask-size: cover;
+			backdrop-filter: var(--glass-filter);
+			background-color: var(--glass-background);
+			inset: 0;
+			mask-image: url('foreground-mask.svg');
+			mask-position: center;
+			mask-repeat: no-repeat;
+			mask-size: cover;
+			pointer-events: none;
+			position: absolute;
+			z-index: 1;
 		}
 
 		h1 {
@@ -82,12 +104,12 @@
 		}
 
 		header, footer {
-			background-color: rgba(237, 237, 230, 0.26);
-			-webkit-backdrop-filter: blur(18px) saturate(140%);
-			backdrop-filter: blur(18px) saturate(140%);
+			background-color: var(--glass-background);
+			-webkit-backdrop-filter: var(--glass-filter);
+			backdrop-filter: var(--glass-filter);
 			padding: 24px 18px;
 			position: relative;
-			z-index: 1;
+			z-index: 2;
 		}
 
 		header {
@@ -124,6 +146,7 @@
 <body>
 	<article>
 		<canvas class="dot-grid" aria-hidden="true"></canvas>
+		<div class="background-glass" aria-hidden="true"></div>
 		<header>
 			<h1>finn pauls</h1>
 			<h2>engineering · product · design</h2>
@@ -225,9 +248,9 @@
 				Math.floor(imageX / photo.width * mask.width)));
 			const maskY = Math.max(0, Math.min(mask.height - 1,
 				Math.floor(imageY / photo.height * mask.height)));
-			const red = mask.pixels[(maskY * mask.width + maskX) * 4];
+			const alpha = mask.pixels[(maskY * mask.width + maskX) * 4 + 3];
 
-			return red < 230;
+			return alpha < 230;
 		}
 
 		function dotTouchesForeground(x, y, radius) {
@@ -250,7 +273,7 @@
 
 		function drawGrid() {
 			context.clearRect(0, 0, width, height);
-			context.fillStyle = '#fff';
+			context.fillStyle = '#000';
 
 			for (let y = grid.gap / 2; y < height; y += grid.gap) {
 				for (let x = grid.gap / 2; x < width; x += grid.gap) {

@@ -1,8 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3840 2683">
-	<rect width="3840" height="2683" fill="#fff" />
+	<defs>
+		<mask id="background" maskUnits="userSpaceOnUse" mask-type="luminance">
+			<rect width="3840" height="2683" fill="#fff" />
 
-	<!-- The paths are traced against a 1877 × 1311 reference of the photograph. -->
-	<g transform="scale(2.045817 2.046529)" fill="#000">
+			<!-- The paths are traced against a 1877 × 1311 reference of the photograph. -->
+			<g transform="scale(2.045817 2.046529)" fill="#000">
 		<!-- Foreground terrain, rocks, and vegetation. -->
 		<path d="M0 540
 			C35 525 70 520 100 540
@@ -27,7 +29,7 @@
 			L1877 1311 L0 1311 Z" />
 
 		<!-- The single foreground figure and backpack. -->
-		<path stroke="#000" stroke-width="24" stroke-linejoin="round" d="M843 610
+				<path stroke="#000" stroke-width="24" stroke-linejoin="round" d="M843 610
 			C862 605 875 613 877 629
 			C880 646 872 657 862 664
 			C869 684 871 708 867 731
@@ -38,5 +40,9 @@
 			C792 669 800 651 816 646
 			C825 642 832 645 838 649
 			L839 622 Z" />
-	</g>
+			</g>
+		</mask>
+	</defs>
+
+	<rect width="3840" height="2683" fill="#fff" mask="url(#background)" />
 </svg>
