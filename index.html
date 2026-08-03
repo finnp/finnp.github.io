@@ -12,9 +12,12 @@
 			background: url('finn.jpg') no-repeat center center fixed;
 			background-size: cover;
 			font-family: 'Sen', sans-serif;
+			isolation: isolate;
 			margin: 25px;
 			min-height: 100%;
 			min-height: calc(100% - 50px);
+			overflow: hidden;
+			position: relative;
 		}
 
 		html,
@@ -47,6 +50,14 @@
 			height: 24px;
 		}
 
+		.dot-grid {
+			inset: 0;
+			mix-blend-mode: difference;
+			pointer-events: none;
+			position: absolute;
+			z-index: 0;
+		}
+
 		h1 {
 			margin-top: 0;
 			margin-bottom: 0.15em;
@@ -64,6 +75,8 @@
 			-webkit-backdrop-filter: blur(18px) saturate(140%);
 			backdrop-filter: blur(18px) saturate(140%);
 			padding: 24px 18px;
+			position: relative;
+			z-index: 1;
 		}
 
 		header {
@@ -91,6 +104,7 @@
 
 <body>
 	<article>
+		<canvas class="dot-grid" aria-hidden="true"></canvas>
 		<header>
 			<h1>finn pauls</h1>
 			<h2>engineering · product · design</h2>
@@ -114,6 +128,116 @@
 			½ of <a href="https://alexandfinn.com" target="_blank">alexandfinn</a>
 		</footer>
 	</article>
+	<script>
+		const article = document.querySelector('article');
+		const canvas = document.querySelector('.dot-grid');
+		const context = canvas.getContext('2d');
+		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const pointer = {
+			x: -1000,
+			y: -1000,
+			targetX: -1000,
+			targetY: -1000,
+			influence: 0,
+			targetInfluence: 0
+		};
+		const grid = {
+			gap: 32,
+			radius: 4,
+			warpRadius: 180,
+			warpStrength: 44
+		};
+		let width = 0;
+		let height = 0;
+		let animationFrame = null;
+
+		function resizeCanvas() {
+			const bounds = article.getBoundingClientRect();
+			const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+			width = bounds.width;
+			height = bounds.height;
+			canvas.width = Math.round(width * pixelRatio);
+			canvas.height = Math.round(height * pixelRatio);
+			canvas.style.width = `${width}px`;
+			canvas.style.height = `${height}px`;
+			context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+			startAnimation();
+		}
+
+		function drawGrid() {
+			context.clearRect(0, 0, width, height);
+			context.fillStyle = '#fff';
+
+			for (let y = grid.gap / 2; y < height; y += grid.gap) {
+				for (let x = grid.gap / 2; x < width; x += grid.gap) {
+					const deltaX = x - pointer.x;
+					const deltaY = y - pointer.y;
+					const distance = Math.hypot(deltaX, deltaY);
+					const falloff = Math.max(0, 1 - distance / grid.warpRadius);
+					const nearCursorDamping = Math.min(distance / 32, 1);
+					const warp = falloff * falloff * nearCursorDamping
+						* grid.warpStrength * pointer.influence;
+					const directionX = distance ? deltaX / distance : 0;
+					const directionY = distance ? deltaY / distance : 0;
+					const dotX = x + directionX * warp;
+					const dotY = y + directionY * warp;
+					const dotRadius = grid.radius + falloff * pointer.influence * 1.5;
+
+					context.beginPath();
+					context.arc(dotX, dotY, dotRadius, 0, Math.PI * 2);
+					context.fill();
+				}
+			}
+		}
+
+		function animate() {
+			pointer.x += (pointer.targetX - pointer.x) * 0.12;
+			pointer.y += (pointer.targetY - pointer.y) * 0.12;
+			pointer.influence += (pointer.targetInfluence - pointer.influence) * 0.12;
+			drawGrid();
+
+			const pointerIsMoving = Math.abs(pointer.targetX - pointer.x) > 0.1
+				|| Math.abs(pointer.targetY - pointer.y) > 0.1;
+			const influenceIsChanging = Math.abs(pointer.targetInfluence - pointer.influence) > 0.001;
+
+			if (pointerIsMoving || influenceIsChanging) {
+				animationFrame = window.requestAnimationFrame(animate);
+			} else {
+				animationFrame = null;
+			}
+		}
+
+		function startAnimation() {
+			if (animationFrame === null) {
+				animationFrame = window.requestAnimationFrame(animate);
+			}
+		}
+
+		if (!reducedMotion) {
+			article.addEventListener('pointermove', (event) => {
+				const bounds = article.getBoundingClientRect();
+				const pointerWasInactive = pointer.targetInfluence === 0 && pointer.influence < 0.01;
+				pointer.targetX = event.clientX - bounds.left;
+				pointer.targetY = event.clientY - bounds.top;
+
+				if (pointerWasInactive) {
+					pointer.x = pointer.targetX;
+					pointer.y = pointer.targetY;
+				}
+
+				pointer.targetInfluence = 1;
+				startAnimation();
+			});
+
+			article.addEventListener('pointerleave', () => {
+				pointer.targetInfluence = 0;
+				startAnimation();
+			});
+		}
+
+		new ResizeObserver(resizeCanvas).observe(article);
+		resizeCanvas();
+	</script>
 </body>
 
 </html>
