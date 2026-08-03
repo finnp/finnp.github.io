@@ -50,6 +50,17 @@
 			height: 24px;
 		}
 
+		.photo-credit {
+			align-items: center;
+			display: flex;
+			gap: 6px;
+		}
+
+		.photo-credit svg {
+			height: 18px;
+			width: 18px;
+		}
+
 		.dot-grid {
 			inset: 0;
 			mix-blend-mode: difference;
@@ -85,7 +96,15 @@
 
 		footer {
 			align-self: flex-end;
+			color: #C9C9C2;
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
 			width: fit-content;
+		}
+
+		footer a {
+			color: inherit;
 		}
 
 		@media (max-width: 400px) {
@@ -125,7 +144,14 @@
 			</div>
 		</header>
 		<footer>
-			½ of <a href="https://alexandfinn.com" target="_blank">alexandfinn</a>
+			<div>½ of <a href="https://alexandfinn.com" target="_blank">alexandfinn</a></div>
+			<div class="photo-credit">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
+					<circle cx="12" cy="13" r="3" />
+				</svg>
+				<span>by <a href="https://marialouceiro.com" target="_blank" rel="noopener noreferrer">marialouceiro</a></span>
+			</div>
 		</footer>
 	</article>
 	<script>
