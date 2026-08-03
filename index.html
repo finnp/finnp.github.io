@@ -9,7 +9,7 @@
 			display: flex;
 			flex-direction: column;
 			justify-content: space-between;
-			background: url('finn.jpg') no-repeat center center fixed;
+			background: url('finn.jpg') no-repeat center center;
 			background-size: cover;
 			font-family: 'Sen', sans-serif;
 			isolation: isolate;
@@ -133,6 +133,16 @@
 		const canvas = document.querySelector('.dot-grid');
 		const context = canvas.getContext('2d');
 		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const photo = {
+			width: 3840,
+			height: 2683
+		};
+		const mask = {
+			width: 960,
+			height: 671,
+			pixels: null
+		};
+		const maskImage = new Image();
 		const pointer = {
 			x: -1000,
 			y: -1000,
@@ -151,6 +161,17 @@
 		let height = 0;
 		let animationFrame = null;
 
+		maskImage.addEventListener('load', () => {
+			const maskCanvas = document.createElement('canvas');
+			const maskContext = maskCanvas.getContext('2d', { willReadFrequently: true });
+			maskCanvas.width = mask.width;
+			maskCanvas.height = mask.height;
+			maskContext.drawImage(maskImage, 0, 0, mask.width, mask.height);
+			mask.pixels = maskContext.getImageData(0, 0, mask.width, mask.height).data;
+			startAnimation();
+		});
+		maskImage.src = 'foreground-mask.svg';
+
 		function resizeCanvas() {
 			const bounds = article.getBoundingClientRect();
 			const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
@@ -162,6 +183,43 @@
 			canvas.style.height = `${height}px`;
 			context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
 			startAnimation();
+		}
+
+		function isForeground(canvasX, canvasY) {
+			if (!mask.pixels) {
+				return true;
+			}
+
+			const scale = Math.max(width / photo.width, height / photo.height);
+			const renderedWidth = photo.width * scale;
+			const renderedHeight = photo.height * scale;
+			const imageX = (canvasX - (width - renderedWidth) / 2) / scale;
+			const imageY = (canvasY - (height - renderedHeight) / 2) / scale;
+			const maskX = Math.max(0, Math.min(mask.width - 1,
+				Math.floor(imageX / photo.width * mask.width)));
+			const maskY = Math.max(0, Math.min(mask.height - 1,
+				Math.floor(imageY / photo.height * mask.height)));
+			const red = mask.pixels[(maskY * mask.width + maskX) * 4];
+
+			return red < 230;
+		}
+
+		function dotTouchesForeground(x, y, radius) {
+			const sampleRadius = radius + 1;
+			const samples = [
+				[0, 0],
+				[sampleRadius, 0],
+				[-sampleRadius, 0],
+				[0, sampleRadius],
+				[0, -sampleRadius],
+				[sampleRadius * 0.7, sampleRadius * 0.7],
+				[-sampleRadius * 0.7, sampleRadius * 0.7],
+				[sampleRadius * 0.7, -sampleRadius * 0.7],
+				[-sampleRadius * 0.7, -sampleRadius * 0.7]
+			];
+
+			return samples.some(([offsetX, offsetY]) =>
+				isForeground(x + offsetX, y + offsetY));
 		}
 
 		function drawGrid() {
@@ -182,6 +240,10 @@
 					const dotX = x + directionX * warp;
 					const dotY = y + directionY * warp;
 					const dotRadius = grid.radius + falloff * pointer.influence * 1.5;
+
+					if (dotTouchesForeground(dotX, dotY, dotRadius)) {
+						continue;
+					}
 
 					context.beginPath();
 					context.arc(dotX, dotY, dotRadius, 0, Math.PI * 2);
