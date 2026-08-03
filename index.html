@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+	<meta charset="UTF-8">
 	<title>finn pauls</title>
 	<style>
 		article {
@@ -23,25 +24,59 @@
 			margin: 0;
 		}
 
+		body {
+			background-color: #EDEDE6;
+		}
+
 
 		a {
 			color: black;
 		}
 
+		.contact-links {
+			display: flex;
+			gap: 12px;
+		}
+
+		.contact-links a {
+			display: inline-flex;
+		}
+
+		.contact-links svg {
+			width: 24px;
+			height: 24px;
+		}
+
 		h1 {
 			margin-top: 0;
+			margin-bottom: 0.15em;
 			font-size: 3em;
-			font-family: 'Liu Jian Mao Cao', cursive;
+			font-family: 'Moirai One', cursive;
+			letter-spacing: normal;
+		}
+
+		h2 {
+			margin-top: 0;
 		}
 
 		header, footer {
-			background-color: rgba(255, 255, 255, 0.7);
-			width: 350px;
+			background-color: rgba(237, 237, 230, 0.26);
+			-webkit-backdrop-filter: blur(18px) saturate(140%);
+			backdrop-filter: blur(18px) saturate(140%);
 			padding: 24px 18px;
 		}
 
+		header {
+			width: 350px;
+		}
+
+		footer {
+			align-self: flex-end;
+			width: fit-content;
+		}
+
 		@media (max-width: 400px) {
-			header, footer {
+			header {
 				width: 90%;
 			}
 
@@ -50,7 +85,7 @@
 			}
 		}
 	</style>
-	<link href="https://fonts.googleapis.com/css?family=Liu+Jian+Mao+Cao|Sen&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Moirai+One|Sen&display=swap" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
@@ -59,7 +94,21 @@
 		<header>
 			<h1>finn pauls</h1>
 			<h2>engineering · product · design</h2>
-			<a href="mailto:ich@finnpauls.de" target="_blank">get in touch!</a>
+			<div class="contact-links">
+				<a href="mailto:ich@finnpauls.de" aria-label="Email Finn">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<rect width="20" height="16" x="2" y="4" rx="2" />
+						<path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+					</svg>
+				</a>
+				<a href="https://www.linkedin.com/in/finnpauls/" target="_blank" rel="noopener noreferrer" aria-label="Finn Pauls on LinkedIn">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+						<rect width="4" height="12" x="2" y="9" />
+						<circle cx="4" cy="4" r="2" />
+					</svg>
+				</a>
+			</div>
 		</header>
 		<footer>
 			½ of <a href="https://alexandfinn.com" target="_blank">alexandfinn</a>
